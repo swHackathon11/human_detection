@@ -1,0 +1,17 @@
+# for  yolov5 parameters
+CONF_WEIGHT = 'yolov5s.pt'
+CONF_SOURCE= 'data/frames'
+CONF_IMG_SIZE=640
+CONF_CONF_THRES=0.25
+CONF_IOU_THRES=0.45
+CONF_DEVICE=''
+CONF_NAME='exp'
+CONF_VIEW_IMG=None
+CONF_SAVE_TXT=None
+CONF_PROJECT='runs/detect'
+
+# for processing parameters
+
+SAMPLING_CYCLE = 30
+TOTAL_MIN=1440
+CAPTURE_CYCLE = 60
