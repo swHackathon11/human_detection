@@ -8,9 +8,6 @@ import matplotlib.pyplot as plt
 from config import SAMPLING_CYCLE,TOTAL_MIN,CAPTURE_CYCLE
 
 Detecter = Detecter()
-face_cascade = cv2.CascadeClassifier('./lbpcascade_profileface.xml')
-
-
 
 def job():
     stack=[]
@@ -40,17 +37,6 @@ def job():
             ret, frame = cam.read()
 
             if ret:
-
-                src_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                faces = face_cascade.detectMultiScale(src_gray)
-
-                ratio = 0.1
-
-                for x, y, w, h in faces:
-                    small = cv2.resize(frame[y: y + h, x: x + w], None, fx=ratio, fy=ratio,
-                                       interpolation=cv2.INTER_NEAREST)
-                    frame[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
-
                 # if currentframe % capture_rate == 0:
                 name = 'data/frames/frame' + str(j) + '.jpg'
                 cv2.imwrite(name, frame)
@@ -64,7 +50,7 @@ def job():
         print(datetime.datetime.now().strftime("%Y-%m-%d"),i,": Avg =",output)
 
         stack.append(output)
-    plt.plot(range(TOTAL_MIN//SAMPLING_CYCLE),x)
+    plt.plot(range(TOTAL_MIN//SAMPLING_CYCLE),stack)
     plt.savefig(target+'result.png')
     cam.release()
     cv2.destroyAllWindows()
