@@ -8,19 +8,18 @@ MYAPP_KEY = 'cf2e6be05d472f52d98fe597730f279a'
 
 class mosaicer:
     def __init__(self):
-
         self.headers = {'Authorization': 'KakaoAK {}'.format(MYAPP_KEY)}
 
     def detect_face(self,filepath):
         file_list = os.listdir(filepath)
 
         for path in file_list:
-            print(filepath+path)
+
 
             try:
-                files = { 'image' : open(filepath+path, 'rb')}
+                files = { 'image': open(filepath+path, 'rb')}
 
-                resp = requests.post(API_URL, headers=self.headers, files=files)
+                resp = requests.post(API_URL, headers=self.headers,files=files)
                 resp.raise_for_status()
                 self.mosaic(filepath+path,resp.json())
 
@@ -44,16 +43,5 @@ class mosaicer:
         image.save(filename)
 
 
-
-if __name__ == "__main__":
-    mo=mosaicer()
-    mo.detect_face("./data/frames/")
-#     parser = argparse.ArgumentParser(description='Mosaic faces.')
-#     parser.add_argument('image_file', type=str, nargs='?', default="./data/frames/frame22.jpg",
-#                         help='image file to hide faces')
-#
-#     args = parser.parse_args()
-#
-#     detection_result = detect_face(args.image_file)
-#     image = mosaic(args.image_file, detection_result)
-#     image.show()
+    def process(self,path):
+        self.detect_face(path)
